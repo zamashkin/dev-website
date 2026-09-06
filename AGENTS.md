@@ -10,22 +10,21 @@ experience, not this project's dependencies.
 
 ## File map
 
-- `index.html`: Page content, metadata, analytics, and the Home, Experience,
+- `public/index.html`: Page content, metadata, analytics, and the Home, Experience,
   Stack, and Contacts sections. Loads the stylesheet and browser script directly.
-- `styles.css`: Theme variables, layouts, animations, and responsive overrides.
-- `script.js`: Experience-link scrolling, responsive SVG timeline layout, and
+- `public/css/styles.css`: Theme variables, layouts, animations, and responsive overrides.
+- `public/js/script.js`: Experience-link scrolling, responsive SVG timeline layout, and
   email copying with success/failure feedback and a clipboard fallback.
-- `tests/copy-email.test.cjs`: Node.js built-in tests that execute `script.js`
+- `tests/copy-email.test.cjs`: Node.js built-in tests that execute `public/js/script.js`
   in a VM with a mocked DOM to verify email-copy behavior.
 - `.github/workflows/deploy.yml`: Tests and uploads website files to the droplet
-  on pushes to `main`. Keep its explicit asset list updated when adding assets.
-- `DEPLOYMENT.md`: Droplet prerequisites and GitHub Actions configuration.
+  on pushes to `main`. Mirrors `public/`, deleting obsolete remote files.
+- `docs/deployment.md`: Droplet prerequisites and GitHub Actions configuration.
 - `design/adaptive-mocks/`: Four retained mobile and tablet PNG design references.
   See `design/README.md` for their scope and which hero reference takes precedence.
-- `my-face-ascii-optimized.webm` and `my-face-poster-optimized.webp`: Hero portrait
-  animation and its poster image.
-- `Aleksandr_Zamashkin_Frontend.pdf`: Linked CV.
-- `favicon.svg` and `link-preview.png`: Browser icon and social preview image.
+- `public/assets/videos/`: Hero portrait animation.
+- `public/assets/images/`: Portrait poster, browser icon, and social preview image.
+- `public/assets/documents/`: Linked CV.
 
 ## Local development
 
@@ -33,16 +32,17 @@ Run commands from the project root. No dependency installation is required.
 
 ```sh
 # Serve the site locally if Python 3 is available.
-python3 -m http.server 8000 --bind 127.0.0.1
+python3 -m http.server 8000 --bind 127.0.0.1 --directory public
 
 # Run the existing tests with a Node.js version supporting node:test.
 node --test tests/copy-email.test.cjs
 
 # Check browser JavaScript syntax.
-node --check script.js
+node --check public/js/script.js
 ```
 
-Open `http://127.0.0.1:8000` for a browser preview. Tabler icon fonts are loaded
+Open `public/index.html` directly for a quick preview, or use
+`http://127.0.0.1:8000` with the optional server. Tabler icon fonts are loaded
 from jsDelivr, and Google Analytics is loaded externally; these require network
 access. There is no configured lint or build command.
 
@@ -50,6 +50,10 @@ access. There is no configured lint or build command.
 
 - Keep changes focused and preserve the plain HTML/CSS/JavaScript architecture
   unless the task calls for a migration or new tooling.
+- Keep runtime code and assets in `public/`, with CSS in `css/`, JavaScript in
+  `js/`, and media in `assets/`. Keep tests, documentation, and design references
+  outside `public/`; everything inside it is deployed. Preserve relative page
+  links so opening `public/index.html` directly still works.
 - Match nearby formatting. JavaScript uses two-space indentation, semicolons,
   and mostly single-quoted strings; CSS uses compact rules and custom properties.
 - Reuse the theme variables in `:root` and the existing dark terminal-inspired

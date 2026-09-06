@@ -25,15 +25,14 @@ jobs:
 
       - name: Validate JavaScript
         run: |
-          node --check script.js
+          node --check public/js/script.js
           node --test tests/copy-email.test.cjs
 
       - name: Prepare website files
         run: |
+          test -s public/index.html
           mkdir -p "$RUNNER_TEMP/website"
-          cp index.html styles.css script.js favicon.svg link-preview.png \
-            my-face-ascii-optimized.webm my-face-poster-optimized.webp \
-            Aleksandr_Zamashkin_Frontend.pdf "$RUNNER_TEMP/website/"
+          rsync -rt --exclude='.DS_Store' public/ "$RUNNER_TEMP/website/"
 
       - name: Upload to droplet
         env:
@@ -63,5 +62,5 @@ jobs:
           printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$ssh_dir/known_hosts"
           chmod 600 "$ssh_dir/key" "$ssh_dir/known_hosts"
           export RSYNC_RSH="ssh -i $ssh_dir/key -p $DEPLOY_PORT -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$ssh_dir/known_hosts -o ConnectTimeout=15"
-          rsync -rtz --delay-updates --chmod=D755,F644 \
+          rsync -rtz --checksum --delay-updates --delete-delay --chmod=D755,F644 \
             "$RUNNER_TEMP/website/" "$DEPLOY_USER@$DEPLOY_HOST:${DEPLOY_PATH%/}/"

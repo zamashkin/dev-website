@@ -1,7 +1,7 @@
 # Deploy to a DigitalOcean droplet
 
 `.github/workflows/deploy.yml` deploys every push to `main`. It runs the existing
-JavaScript checks, prepares the eight website files, and uploads them with rsync
+JavaScript checks, prepares the contents of `public/`, and uploads them with rsync
 over SSH. You can also run it from GitHub's Actions tab using Run workflow on main.
 This publishes the website; it does not create a GitHub Release or version tag.
 
@@ -65,20 +65,37 @@ known-hosts entry. The droplet firewall must permit the runner's SSH connection.
 
 ## Files uploaded
 
-Only these files are copied:
+All files and subdirectories inside `public/` are copied automatically. The
+current structure includes:
 
-- `index.html`, `styles.css`, and `script.js`
-- `favicon.svg` and `link-preview.png`
-- `my-face-ascii-optimized.webm` and `my-face-poster-optimized.webp`
-- `Aleksandr_Zamashkin_Frontend.pdf`
+- `index.html`
+- `css/` and `js/`
+- `assets/images/`, `assets/videos/`, and `assets/documents/`
+
+The contents go directly into `DEPLOY_PATH`, not a nested `public/` directory.
+Keep the droplet's existing web root and `DEPLOY_PATH` unchanged when migrating
+from the old flat repository layout.
 
 The entire `design/` directory (including adaptive mocks), tests, documentation,
-Git metadata, and workflow files are excluded by this explicit file list. Add
-new website assets to the workflow's Prepare website files step when needed.
+Git metadata, and workflow files stay outside `public/` and are not deployed.
+`.DS_Store` is also excluded. Put new runtime assets inside `public/assets/`;
+they will be included automatically. Everything in `public/` is intended to be
+publicly accessible, so keep development files and credentials outside it.
 
-Existing remote files are preserved. If old design files are already on the
-droplet, remove those separately after confirming their location. Transfers
-delay replacement until the end, but are not an atomic whole-site release.
+Deployment mirrors `public/`: new files are added, changed files are updated,
+and remote files absent from `public/` are deleted at the end of the transfer.
+Renamed files are handled as an addition and a deletion. Checksums detect content
+changes even when a file's size and modification time are unchanged.
+
+`DEPLOY_PATH` must be a directory dedicated to this website. Do not store uploads,
+server configuration, or other independently maintained files there: they would
+be deleted. This also removes files left over from the old flat website layout
+and any previously uploaded design mockups on the next deployment.
+
+The workflow requires a nonempty `public/index.html` before preparing an upload.
+Transfers delay replacement and deletion until the end, but are not an atomic
+whole-site release. A full redesign needs no upload-list changes; keep the
+website in `public/` and update its tests alongside any behavior changes.
 
 ## Enable and check deployment
 

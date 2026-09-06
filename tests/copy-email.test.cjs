@@ -4,7 +4,7 @@ const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
 
-const source = fs.readFileSync(path.join(__dirname, '../script.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../public/js/script.js'), 'utf8');
 const originalLabel = '<span aria-hidden="true">▣</span> Copy email';
 
 function setup({ writeText, fallback = () => true } = {}) {
