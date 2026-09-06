@@ -17,9 +17,8 @@ experience, not this project's dependencies.
   email copying with success/failure feedback and a clipboard fallback.
 - `tests/copy-email.test.cjs`: Node.js built-in tests that execute `script.js`
   in a VM with a mocked DOM to verify email-copy behavior.
-- `design/adaptive-mocks/`: Mobile and tablet PNG design references, including
-  several historical variants. Use the current page and requested design as
-  context when choosing a reference.
+- `design/adaptive-mocks/`: Four retained mobile and tablet PNG design references.
+  See `design/README.md` for their scope and which hero reference takes precedence.
 - `my-face-ascii-optimized.webm` and `my-face-poster-optimized.webp`: Hero portrait
   animation and its poster image.
 - `Aleksandr_Zamashkin_Frontend.pdf`: Linked CV.
