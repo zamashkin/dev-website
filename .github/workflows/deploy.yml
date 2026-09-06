@@ -1,0 +1,67 @@
+name: Deploy website
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-deployment
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Validate JavaScript
+        run: |
+          node --check script.js
+          node --test tests/copy-email.test.cjs
+
+      - name: Prepare website files
+        run: |
+          mkdir -p "$RUNNER_TEMP/website"
+          cp index.html styles.css script.js favicon.svg link-preview.png \
+            my-face-ascii-optimized.webm my-face-poster-optimized.webp \
+            Aleksandr_Zamashkin_Frontend.pdf "$RUNNER_TEMP/website/"
+
+      - name: Upload to droplet
+        env:
+          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+          DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT || '22' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in DEPLOY_HOST DEPLOY_USER DEPLOY_PATH DEPLOY_SSH_KEY DEPLOY_KNOWN_HOSTS; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing required GitHub Actions secret: $name"
+              exit 1
+            fi
+          done
+          [[ "$DEPLOY_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]] || { echo 'Invalid host: use an IPv4 address or hostname.'; exit 1; }
+          [[ "$DEPLOY_USER" =~ ^[a-z_][a-zA-Z0-9_-]*$ ]] || { echo 'Invalid SSH username.'; exit 1; }
+          [[ "$DEPLOY_PORT" =~ ^[0-9]+$ ]] || { echo 'Invalid SSH port.'; exit 1; }
+          [[ "$DEPLOY_PATH" =~ ^/[a-zA-Z0-9_./-]+$ && "$DEPLOY_PATH" != / ]] || { echo 'Use an absolute website directory without spaces.'; exit 1; }
+
+          ssh_dir=$(mktemp -d)
+          trap 'rm -rf "$ssh_dir"' EXIT
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$ssh_dir/key"
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > "$ssh_dir/known_hosts"
+          chmod 600 "$ssh_dir/key" "$ssh_dir/known_hosts"
+          export RSYNC_RSH="ssh -i $ssh_dir/key -p $DEPLOY_PORT -o IdentitiesOnly=yes -o BatchMode=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$ssh_dir/known_hosts -o ConnectTimeout=15"
+          rsync -rtz --delay-updates --chmod=D755,F644 \
+            "$RUNNER_TEMP/website/" "$DEPLOY_USER@$DEPLOY_HOST:${DEPLOY_PATH%/}/"

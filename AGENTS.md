@@ -17,6 +17,9 @@ experience, not this project's dependencies.
   email copying with success/failure feedback and a clipboard fallback.
 - `tests/copy-email.test.cjs`: Node.js built-in tests that execute `script.js`
   in a VM with a mocked DOM to verify email-copy behavior.
+- `.github/workflows/deploy.yml`: Tests and uploads website files to the droplet
+  on pushes to `main`. Keep its explicit asset list updated when adding assets.
+- `DEPLOYMENT.md`: Droplet prerequisites and GitHub Actions configuration.
 - `design/adaptive-mocks/`: Four retained mobile and tablet PNG design references.
   See `design/README.md` for their scope and which hero reference takes precedence.
 - `my-face-ascii-optimized.webm` and `my-face-poster-optimized.webp`: Hero portrait
