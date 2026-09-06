@@ -1,3 +1,31 @@
+const heroPoster = document.querySelector('.hero-poster');
+const heroVideo = document.querySelector('.hero-video');
+
+if (heroPoster) {
+  const revealPoster = () => heroPoster.classList.add('is-ready');
+  heroPoster.addEventListener('load', revealPoster, { once: true });
+  if (heroPoster.complete && heroPoster.naturalWidth > 0) revealPoster();
+}
+
+if (heroVideo) {
+  const revealVideo = () => {
+    if (!heroVideo.error) heroVideo.classList.add('is-ready');
+  };
+
+  // Keep the poster underneath until a decoded video frame reaches the compositor.
+  if ('requestVideoFrameCallback' in heroVideo) {
+    heroVideo.requestVideoFrameCallback(revealVideo);
+  } else {
+    const revealAfterPaint = () => {
+      window.requestAnimationFrame(() => window.requestAnimationFrame(revealVideo));
+    };
+    if (heroVideo.readyState >= 2) revealAfterPaint();
+    else heroVideo.addEventListener('loadeddata', revealAfterPaint, { once: true });
+  }
+
+  heroVideo.addEventListener('error', () => heroVideo.classList.remove('is-ready'));
+}
+
 const experienceTeaser = document.querySelector('.section-teaser[href="#experience"]');
 experienceTeaser?.addEventListener('click', (event) => {
   const experienceHeading = document.querySelector('#experience .section-heading');
