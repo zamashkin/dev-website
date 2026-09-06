@@ -20,14 +20,15 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
 .role { margin:28px 0 18px; font-size:clamp(24px,2.2vw,35px); letter-spacing:.09em; }
 .availability { display:inline-flex; width:max-content; align-items:center; gap:14px; margin:0 0 26px; padding:9px 14px; color:var(--green); border:1px solid var(--green); border-radius:4px; background:#54d9840a; box-shadow:inset 0 0 0 1px #54d98412,0 0 18px #54d9840d; font-size:16px; letter-spacing:.03em; }
 .pitch { max-width:765px; margin:0; color:#eee9e1; font-size:20px; line-height:2.25; }
-.hero-video-frame { position:relative; min-height:0; isolation:isolate; }
+.hero-video-frame { position:relative; min-height:0; isolation:isolate; opacity:0; transition:opacity .7s ease; }
+.hero-video-frame:has(.is-ready) { opacity:1; }
 
-.hero-poster,.hero-video { opacity:0; transition:opacity .7s ease; }
+.hero-poster,.hero-video { opacity:0; }
 .hero-poster { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; pointer-events:none; }
 .hero-video { position:relative; display:block; width:100%; height:100%; min-height:100%; object-fit:cover; background:transparent; }
 .hero-poster.is-ready,.hero-video.is-ready { opacity:1; }
 .hero-video-frame:has(.hero-video.is-ready) .hero-poster { opacity:0; }
-@media (prefers-reduced-motion:reduce) { .hero-poster,.hero-video { transition:none; } }
+@media (prefers-reduced-motion:reduce) { .hero-video-frame { transition:none; } }
 .hero-actions { display:flex; gap:16px; margin:38px 30px 0; }
 .hero-button { display:inline-flex; min-height:54px; align-items:center; gap:12px; padding:0 20px; color:var(--ink); border:1px solid #67717b; background:#06111c; font-size:17px; transition:transform .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease; }
 .hero-button .ti { font-size:22px; line-height:1; }.hero-button:hover { transform:translateY(-3px); color:var(--cyan); border-color:var(--cyan); box-shadow:0 12px 24px #0005; }.hero-button.is-primary { color:var(--cyan); border-color:var(--cyan); background:#1de4ec0d; box-shadow:inset 0 0 0 1px #1de4ec22,0 0 18px #1de4ec14; }
