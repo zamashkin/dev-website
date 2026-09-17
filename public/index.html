@@ -61,44 +61,80 @@ complex architectures and business logic.
 
       <section class="section experience-section" id="experience">
         <header class="section-heading"><h2>Experience</h2></header>
-        <div class="timeline" aria-label="Work experience timeline">
-          <svg class="git-graph" viewBox="0 0 1100 970" aria-hidden="true">
-            <path class="graph-main graph-main-trunk" d="M56 70V895" />
-            <path class="graph-main graph-main-branches" d="M56 170H140M56 400H140M56 630H140" />
-            <path class="graph-contract graph-contract-branches" d="M570 680H650M865 850C865 880 828 895 760 895H56" />
-            <g class="graph-nodes">
-              <circle cx="56" cy="170" r="10" />
-              <circle cx="56" cy="400" r="10" />
-              <circle cx="56" cy="630" r="10" />
-              <circle cx="56" cy="895" r="10" />
-            </g>
-          </svg>
-
-          <span class="branch-label">main</span>
-
-          <article class="job-card work-one">
-            <p class="job-code">WORK 01</p>
-            <p class="job-meta">Aventica / QA / 2018–2019</p>
-            <p>Started my career in QA, building a strong foundation in product quality through manual and automated testing for several projects for Russia’s largest bank.</p>
+        <p class="experience-intro">A career shaped by quality, product thinking and growing technical ownership.</p>
+        <p class="experience-path">Quality <span aria-hidden="true">→</span> Product thinking <span aria-hidden="true">→</span> Technical ownership <span aria-hidden="true">→</span> Startup decisions</p>
+        <div class="experience-timeline" aria-label="Work experience timeline">
+          <article class="experience-card experience-card-early experience-card-aventica">
+            <span class="experience-rail" aria-hidden="true"></span>
+            <div class="experience-card-content">
+              <div class="experience-card-main">
+                <p class="experience-chapter">01 / QUALITY FOUNDATIONS</p>
+                <h3>Aventica</h3>
+                <p class="experience-meta">QA Engineer <span aria-hidden="true">|</span> 2018–2019</p>
+                <div class="experience-story" id="story-aventica">
+                  <p>I started my career in QA with a foundation in HTML and CSS. After learning Python, I began using it to automate tests, building practical programming experience alongside my testing work and eventually automating 89% of test cases.</p>
+                  <p>I was particularly interested in interfaces and user experience, so when an opportunity to move into frontend development came up, I took it.</p>
+                </div>
+                <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-aventica" aria-expanded="false">Read more</button>
+                <p class="experience-tech">Python <span aria-hidden="true">·</span> Selenium</p>
+              </div>
+              <div class="experience-outcome"><strong>89%</strong><span>of test cases automated</span></div>
+            </div>
           </article>
 
-          <article class="job-card work-two">
-            <p class="job-code">WORK 02</p>
-            <p class="job-meta">Mel.fm / Frontend Developer / 2019–2020</p>
-            <p>Started my frontend journey at digital media, learning to develop and maintain reader-facing experiences used by millions each month, as well as admin interfaces for the editorial team.</p>
+          <article class="experience-card experience-card-early experience-card-mel">
+            <span class="experience-rail" aria-hidden="true"></span>
+            <div class="experience-card-content">
+              <div class="experience-card-main">
+                <p class="experience-chapter">02 / UNDERSTANDING BUSINESS NEEDS</p>
+                <h3>Mel.fm</h3>
+                <p class="experience-meta">Frontend Developer <span aria-hidden="true">|</span> 2019–2020</p>
+                <div class="experience-story" id="story-mel">
+                  <p>At Mel.fm, I built reader-facing experiences and tools for the editorial team. Working with editors and marketing taught me to understand the goals behind their requests and connect frontend work with business needs.</p>
+                  <p>Alongside that, I gained experience improving a product used by millions of readers. I helped modernize the frontend through the transition from legacy Closure code toward React and implemented AMP pages that reduced mobile load time by 47%.</p>
+                </div>
+                <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-mel" aria-expanded="false">Read more</button>
+                <p class="experience-tech">React <span aria-hidden="true">·</span> GraphQL</p>
+              </div>
+              <div class="experience-outcome"><strong>47%</strong><span>reduction in mobile load time</span></div>
+            </div>
           </article>
 
-          <article class="job-card work-three">
-            <p class="job-code">WORK 03</p>
-            <p class="job-meta">Raiffeisen Bank Russia / Frontend Engineer / 2021–2026</p>
-            <p>Expanded my role beyond implementation, contributing to product decisions, technical architecture, and cross-team collaboration.</p>
-          </article>
+          <div class="experience-pair">
+            <article class="experience-card experience-card-raiffeisen">
+              <span class="experience-rail" aria-hidden="true"></span>
+              <p class="experience-chapter">03 / GROWING INTO OWNERSHIP</p>
+              <h3>Raiffeisen Bank Russia</h3>
+              <p class="experience-meta">Frontend Engineer <span aria-hidden="true">|</span> 2021–2026</p>
+              <div class="experience-story" id="story-raiffeisen">
+                <p>I joined an established tax-payment product for small and medium businesses, initially implementing analyst-defined tasks and learning to work within a Scrum team. As our team’s scope expanded to four products, I helped build three new services from scratch: employee payments, automatic tax savings, and a tax account for tracking tax deductions in a dedicated government system.</p>
+                <p>I handled frontend development largely independently for three products and collaborated on the fourth. Over time, I took ownership of features, contributed heavily to planning, and became someone teammates turned to for product context. I regularly reviewed code and worked through technical questions with colleagues, sharing knowledge and seeking advice.</p>
+                <p>My responsibilities also grew to include architectural decisions and long-term maintainability. I advocated for independent microfrontend modules so products could be released separately and their codebases kept manageable, while sharing a common technology stack and the bank’s design system. As part of the bank’s broader architectural transition, I migrated an application out of the legacy monorepository, reducing build time by 67% and eliminating cross-team release approvals.</p>
+                <p>My work extended beyond our own products. I developed a broad understanding of the bank’s frontend architecture and contributed changes to other teams’ products when integrating our functionality, aligning technical decisions with those teams when needed. For a unified entry point requested by product managers, I designed and delivered an integration that reused existing microfrontends and preserved separate repositories, reducing implementation effort while allowing both teams to develop and release independently.</p>
+              </div>
+              <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-raiffeisen" aria-expanded="false">Read more</button>
+              <p class="experience-tech">React <span aria-hidden="true">·</span> TypeScript <span aria-hidden="true">·</span> Webpack <span aria-hidden="true">·</span> Cypress</p>
+              <div class="experience-outcomes">
+                <div class="experience-outcome"><strong>20,000+</strong><span>users of the signing integration</span></div>
+                <div class="experience-outcome"><strong>67%</strong><span>reduction in build time</span></div>
+              </div>
+            </article>
 
-          <article class="job-card contract-card">
-            <div class="job-title"><p class="job-code">WORK 04</p><span>contract</span></div>
-            <p class="job-meta">Intrepid Fox / Frontend Engineer / 2024–2025</p>
-            <p>Applied my experience to an early-stage AI product, combining user-facing improvements with complex, data-driven admin interfaces.</p>
-          </article>
+            <article class="experience-card experience-card-contract">
+              <p class="experience-chapter">04 / STARTUP DECISIONS</p>
+              <h3>Intrepid Fox</h3>
+              <p class="experience-meta">Frontend Engineer <span aria-hidden="true">|</span> 2024–2025</p>
+              <p class="experience-contract-meta"><span>Part-time contract</span> Alongside Raiffeisen</p>
+              <div class="experience-story" id="story-intrepid">
+                <p>Alongside my banking work, I joined an early-stage AI product using Vue and Nuxt. The startup environment gave me greater involvement in technology choices, weighing immediate delivery needs against future development.</p>
+                <p>I contributed to a KYB onboarding redesign that helped completion rise from 13% to 26%. I also co-developed an interactive reporting interface for exploring complex dependency graphs, helping evaluate visualization libraries against a demanding design, potentially large graphs, Vue compatibility, and active maintenance.</p>
+                <p>This experience broadened my technical range and gave me more practice choosing tools around the needs of a developing product.</p>
+              </div>
+              <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-intrepid" aria-expanded="false">Read more</button>
+              <p class="experience-tech">Vue <span aria-hidden="true">·</span> Nuxt</p>
+              <div class="experience-outcome"><strong>13% <span aria-hidden="true">→</span> 26%</strong><span>KYB onboarding completion</span></div>
+            </article>
+          </div>
         </div>
       </section>
 

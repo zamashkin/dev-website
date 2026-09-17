@@ -19,7 +19,7 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
 @media (prefers-reduced-motion:reduce) { .online-indicator::after { opacity:.35; animation:none; transform:scale(1.45); } }
 .role { margin:28px 0 18px; font-size:clamp(24px,2.2vw,35px); letter-spacing:.09em; }
 .availability { display:inline-flex; width:max-content; align-items:center; gap:14px; margin:0 0 26px; padding:9px 14px; color:var(--green); border:1px solid var(--green); border-radius:4px; background:#54d9840a; box-shadow:inset 0 0 0 1px #54d98412,0 0 18px #54d9840d; font-size:16px; letter-spacing:.03em; }
-.pitch { max-width:765px; margin:0; color:#eee9e1; font-size:20px; line-height:2.25; }
+.pitch { max-width:765px; margin:0; color:#eee9e1; font-size:20px; line-height:1.75; }
 .hero-video-frame { position:relative; min-height:0; isolation:isolate; opacity:0; transition:opacity .7s ease; }
 .hero-video-frame:has(.is-ready) { opacity:1; }
 
@@ -37,21 +37,60 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
 .section-heading { display:flex; align-items:center; gap:24px; margin-bottom:50px; scroll-margin-top:24px; }
 .section-heading::after { flex:1; height:2px; content:""; background:var(--cyan); }
 .section-heading h2 { margin:0; font-size:31px; font-weight:500; }
-.experience-section { min-height:1120px; }
-.timeline { position:relative; width:1100px; height:970px; max-width:100%; margin:0 auto; }
-.git-graph { position:absolute; inset:0; width:1100px; height:100%; overflow:visible; pointer-events:none; }
-.graph-main,.graph-contract { fill:none; stroke-width:3; vector-effect:non-scaling-stroke; }
-.graph-main { stroke:var(--cyan); }
-.graph-contract { stroke:var(--coral); }
-.graph-nodes circle { fill:var(--bg); stroke:var(--cyan); stroke-width:3; }
-.branch-label { position:absolute; top:54px; left:22px; color:var(--cyan); padding:4px 8px; border:1px solid var(--cyan); border-radius:4px; background:var(--panel); }
-.job-card { position:absolute; width:430px; min-height:180px; padding:28px 32px; border:1px solid var(--line); border-radius:8px; background:linear-gradient(145deg,#0b1723,#06111d); box-shadow:0 18px 34px #0004; }
-.job-card p { margin:0; }
-.job-code { color:var(--cyan); font-size:19px; }
-.job-meta { margin:10px 0 21px !important; color:#66717a; font-size:13px; }
-.job-card > p:last-child { max-width:340px; color:#ddd8d1; font-size:14px; line-height:1.55; }
-.work-one { top:80px; left:140px; }.work-two { top:310px; left:140px; }.work-three { top:540px; left:140px; }.contract-card { top:650px; left:650px; }
-.job-title { display:flex; align-items:center; gap:18px; }.job-title span { padding:2px 8px; color:var(--coral); border:1px solid var(--coral); border-radius:4px; font-size:13px; }
+.experience-section { min-height:0; padding-bottom:88px; }
+.experience-section .section-heading { margin-bottom:14px; }
+.experience-intro { margin:0 0 8px; color:#dce0e3; font:17px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; }
+.experience-path { margin:0 0 28px; color:var(--cyan); font-size:16px; line-height:1.7; }
+.experience-path span { margin:0 9px; }
+.experience-timeline { position:relative; display:grid; gap:22px; padding-left:72px; }
+.experience-card { --node-offset:42px; position:relative; min-width:0; padding:24px 28px; border:1px solid var(--line); border-radius:8px; background:linear-gradient(145deg,#0b1723,#06111d); box-shadow:0 18px 34px #0004; }
+.experience-card-early { --node-offset:82px; margin-left:40px; }
+.experience-rail { position:absolute; top:25px; bottom:-49px; left:calc(-1 * var(--node-offset) - 1px); width:2px; background:var(--cyan); pointer-events:none; }
+.experience-card-raiffeisen .experience-rail { bottom:-1px; }
+.experience-card::before { z-index:1; box-sizing:border-box; }
+.experience-card:not(.experience-card-contract)::before { position:absolute; top:15px; left:calc(-1 * var(--node-offset) - 10px); width:20px; height:20px; content:""; border:3px solid var(--cyan); border-radius:50%; background:var(--bg); }
+.experience-card:not(.experience-card-contract)::after { position:absolute; top:24px; left:calc(-1 * var(--node-offset)); width:var(--node-offset); height:2px; content:""; background:var(--cyan); }
+.experience-card-content { display:grid; grid-template-columns:minmax(0,1fr) 270px; gap:32px; align-items:stretch; }
+.experience-card-main { min-width:0; }
+.experience-chapter { margin:0; color:var(--cyan); font-size:14px; line-height:1.5; }
+.experience-card h3 { margin:6px 0 3px; font-size:28px; line-height:1.15; overflow-wrap:normal; }
+.experience-meta { margin:0 0 15px; color:#c5cdd5; font-size:14px; line-height:1.55; }
+.experience-meta span { margin:0 7px; color:#8999a6; }
+.experience-story { position:relative; font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; color:#e7e5e2; }
+.experience-story p { margin:0 0 15px; }
+.experience-story p:last-child { margin-bottom:0; }
+.experience-card.is-interactive .experience-story { height:var(--preview-height); overflow:hidden; transition:height .38s ease; }
+.experience-card.is-interactive .experience-story::after { position:absolute; right:0; bottom:0; left:0; height:50px; content:""; pointer-events:none; background:linear-gradient(transparent,#081521 94%); transition:opacity .2s ease; }
+.experience-card.is-interactive .experience-story.is-expanded { height:auto; }
+.experience-card.is-interactive .experience-story.is-expanded::after { opacity:0; }
+.experience-card-aventica { --preview-height:125px; }
+.experience-card-mel { --preview-height:125px; }
+.experience-card-raiffeisen { --preview-height:190px; }
+.experience-card-contract { --preview-height:190px; }
+.experience-toggle { display:none; align-items:center; gap:12px; min-height:38px; margin:12px 0 14px; padding:5px 13px; color:var(--ink); cursor:pointer; border:1px solid var(--cyan); border-radius:5px; background:transparent; font:13px var(--mono); }
+.experience-card.is-interactive .experience-toggle { display:inline-flex; }
+.experience-toggle::after { content:"⌄"; color:var(--cyan); font-size:18px; line-height:1; transition:transform .25s ease; }
+.experience-toggle[aria-expanded="true"]::after { transform:rotate(180deg); }
+.experience-toggle:hover { background:#1de4ec12; }
+.experience-toggle:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
+.experience-tech { margin:0; color:#bdc9d2; font-size:13px; line-height:1.5; }
+.experience-tech span { color:#8da4b2; }
+.experience-outcome { display:flex; justify-content:center; flex-direction:column; min-width:0; }
+.experience-card-content > .experience-outcome { padding-left:32px; border-left:1px solid var(--line); }
+.experience-outcome strong { display:block; color:var(--cyan); font-size:42px; line-height:1.1; font-weight:600; white-space:nowrap; }
+.experience-outcome > span { color:#d3d9dc; font:15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif; }
+.experience-pair { position:relative; display:grid; grid-template-columns:minmax(0,1.65fr) minmax(320px,1fr); gap:36px; }
+.experience-pair::before { position:absolute; top:-12px; left:-41px; width:calc(61.75% + 41px); height:2px; content:""; background:var(--coral); }
+.experience-pair::after { position:absolute; top:-12px; left:calc(61.75% - 1px); width:2px; height:38px; content:""; background:var(--coral); }
+.experience-card-contract { border-color:#8f403a; }
+.experience-card-contract::before { position:absolute; top:15px; left:-29px; width:20px; height:20px; content:""; border:3px solid var(--coral); border-radius:50%; background:var(--bg); }
+.experience-card-contract .experience-chapter { color:var(--coral); }
+.experience-contract-meta { display:flex; align-items:center; flex-wrap:wrap; gap:9px 13px; margin:0 0 18px; color:#b5c0cb; font-size:12px; }
+.experience-contract-meta span { padding:3px 8px; color:var(--coral); border:1px solid var(--coral); border-radius:4px; }
+.experience-outcomes { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
+.experience-outcomes .experience-outcome + .experience-outcome { padding-left:20px; border-left:1px solid var(--line); }
+.experience-card-contract > .experience-outcome { margin-top:18px; padding-top:16px; border-top:1px solid var(--line); }
+@media (prefers-reduced-motion:reduce) { .experience-card.is-interactive .experience-story,.experience-card.is-interactive .experience-story::after,.experience-toggle::after { transition:none; } }
 .stack-section { min-height:900px; }
 .terminal-window { overflow:hidden; border:1px solid var(--line); border-radius:14px; background:linear-gradient(130deg,#07131f,#030b14); box-shadow:0 20px 50px #0005; }
 .window-bar { display:flex; gap:14px; padding:28px; border-bottom:1px solid #172532; }.window-bar i { width:23px; height:23px; border-radius:50%; background:#ff5d51; }.window-bar i:nth-child(2){background:#ffd253}.window-bar i:nth-child(3){background:#32d65d}
@@ -83,23 +122,29 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
   .availability { grid-column:1; grid-row:4; margin:0; padding:8px 12px; font-size:14px; }
   .hero-video-frame { grid-column:2; grid-row:1 / 5; height:414px; min-height:0; }
   .hero-video { height:100%; min-height:0; object-fit:cover; }
-  .pitch { grid-column:1 / -1; grid-row:5; max-width:none; margin:50px 0 0; font-size:15.5px; line-height:3; }
+  .pitch { grid-column:1 / -1; grid-row:5; max-width:none; margin:50px 0 0; font-size:15.5px; line-height:1.6; }
   .hero-actions { margin:36px 0 0; }
   .section-teaser { margin-right:0; margin-left:0; }
 
   .section-heading { gap:18px; margin-bottom:28px; }
   .section-heading h2 { font-size:25px; }
   .section-heading::after { height:1px; }
-  .experience-section { min-height:0; }
-  .timeline { width:100%; height:auto; margin:0; }
-  .git-graph { width:100%; height:100%; }
-  .branch-label { top:0; left:18px; padding:2px 6px; font-size:13px; }
-  .job-card { left:96px; width:min(460px,calc(100% - 96px)); min-height:0; padding:22px 24px; }
-  .job-code { font-size:17px; }
-  .job-meta { margin:7px 0 14px !important; font-size:12px; }
-  .job-card > p:last-child { max-width:none; font-size:13px; }
-  .contract-card { border-color:var(--coral); }
-  .graph-nodes circle:last-child { stroke:var(--coral); }
+  .experience-section { padding-bottom:64px; }
+  .experience-timeline { gap:18px; padding-left:56px; }
+  .experience-card,.experience-card-early { --node-offset:40px; margin-left:0; }
+  .experience-rail { bottom:-45px; }
+  .experience-card { padding:22px 24px; }
+  .experience-card-content { grid-template-columns:minmax(0,1fr) 195px; gap:22px; }
+  .experience-card-content > .experience-outcome { padding-left:22px; }
+  .experience-pair { grid-template-columns:1fr; gap:18px; }
+  .experience-pair::before { display:none; }
+  .experience-pair::after { display:none; }
+  .experience-card-contract::before { left:-50px; }
+  .experience-card-contract::after { position:absolute; top:-19px; bottom:32px; left:-41px; width:41px; content:""; background-image:linear-gradient(var(--coral),var(--coral)),linear-gradient(var(--coral),var(--coral)); background-position:0 0,0 43px; background-size:2px 100%,100% 2px; background-repeat:no-repeat; }
+  .experience-card-aventica { --preview-height:180px; }
+  .experience-card-mel { --preview-height:175px; }
+  .experience-card-raiffeisen { --preview-height:180px; }
+  .experience-card-contract { --preview-height:135px; }
 
   .stack-section { min-height:0; }
   .terminal-window { border-radius:9px; }
@@ -141,7 +186,7 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
   .availability { grid-column:1; grid-row:4; gap:9px; margin:0; padding:5px 9px; font-size:11px; line-height:17px; }
   .online-indicator { width:12px; height:12px; }
   .hero-video-frame { grid-column:1; grid-row:5; width:min(220px,100%); height:344px; margin:8px auto 0; }
-  .pitch { grid-column:1; grid-row:6; margin:5px 0 0; font-size:11px; line-height:2.15; }
+  .pitch { grid-column:1; grid-row:6; margin:5px 0 0; font-size:11px; line-height:1.6; }
   .hero-actions { gap:8px; margin:10px 18px 0; }
   .hero-button { flex:1; min-height:36px; justify-content:center; gap:8px; padding:0 9px; font-size:12px; }
   .hero-button .ti { font-size:18px; }
@@ -150,15 +195,37 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
 
   .section-heading { gap:14px; margin-bottom:18px; }
   .section-heading h2 { font-size:20px; }
-  .timeline { min-height:0; }
-  .branch-label { left:4px; font-size:12px; }
-  .job-card { left:70px; width:calc(100% - 70px); padding:16px 18px; border-radius:6px; }
-  .job-code { font-size:14px; }
-  .job-meta { margin:6px 0 12px !important; font-size:10px; }
-  .job-card > p:last-child { font-size:11px; line-height:1.55; }
-  .job-title { gap:9px; }
-  .job-title span { padding:1px 5px; font-size:10px; }
-  .contract-card { border-color:var(--line); }
+  .experience-section { padding-bottom:46px; }
+  .experience-section .section-heading { margin-bottom:12px; }
+  .experience-intro { font-size:15px; }
+  .experience-path { margin-bottom:22px; font-size:13px; }
+  .experience-path span { margin:0 4px; }
+  .experience-timeline { gap:14px; padding-left:26px; }
+  .experience-card,.experience-card-early { --node-offset:19px; padding:17px 18px; }
+  .experience-rail { top:23px; bottom:-39px; }
+  .experience-card:not(.experience-card-contract)::before { top:14px; width:18px; height:18px; left:calc(-1 * var(--node-offset) - 9px); }
+  .experience-card:not(.experience-card-contract)::after { top:22px; }
+  .experience-card-content { grid-template-columns:1fr; gap:0; }
+  .experience-chapter { font-size:12px; }
+  .experience-card h3 { font-size:25px; }
+  .experience-meta { margin-bottom:13px; font-size:13px; }
+  .experience-story { font-size:15px; line-height:1.55; }
+  .experience-card-aventica { --preview-height:185px; }
+  .experience-card-mel { --preview-height:165px; }
+  .experience-card-raiffeisen { --preview-height:150px; }
+  .experience-card-contract { --preview-height:185px; }
+  .experience-toggle { min-height:40px; margin:12px 0 14px; }
+  .experience-card-content > .experience-outcome,.experience-card-contract > .experience-outcome { margin-top:16px; padding:16px 0 0; border-top:1px solid var(--line); border-left:0; }
+  .experience-outcome strong { font-size:36px; }
+  .experience-outcome > span { font-size:13px; }
+  .experience-pair { gap:14px; }
+  .experience-card-contract::before { top:14px; left:-28px; width:18px; height:18px; }
+  .experience-card-contract::after { top:-15px; left:-20px; width:20px; background-position:0 0,0 37px; }
+  .experience-contract-meta { font-size:11px; }
+  .experience-outcomes { gap:12px; }
+  .experience-outcomes .experience-outcome + .experience-outcome { padding-left:12px; }
+  .experience-outcomes .experience-outcome strong { font-size:28px; }
+  .experience-tech { font-size:12px; }
 
   .terminal-window { border-radius:8px; }
   .window-bar { gap:8px; padding:15px 18px; }
@@ -186,4 +253,18 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
   .hero h1 { font-size:42px; }
   .hero-video-frame { height:318px; margin-top:5px; }
   .pitch { line-height:1.85; }
+  .experience-card,.experience-card-early { padding:15px 14px; }
+  .experience-card h3 { font-size:23px; }
+  .experience-outcomes .experience-outcome strong { font-size:25px; }
+}
+
+@media (min-width:820px) and (max-width:1099px) {
+  .experience-card-aventica { --preview-height:125px; }
+  .experience-card-mel { --preview-height:125px; }
+}
+
+@media (min-width:501px) and (max-width:640px) {
+  .experience-card-aventica { --preview-height:120px; }
+  .experience-card-mel { --preview-height:110px; }
+  .experience-card-contract { --preview-height:135px; }
 }

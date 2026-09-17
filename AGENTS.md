@@ -13,15 +13,18 @@ experience, not this project's dependencies.
 - `public/index.html`: Page content, metadata, analytics, and the Home, Experience,
   Stack, and Contacts sections. Loads the stylesheet and browser script directly.
 - `public/css/styles.css`: Theme variables, layouts, animations, and responsive overrides.
-- `public/js/script.js`: Experience-link scrolling, responsive SVG timeline layout, and
-  email copying with success/failure feedback and a clipboard fallback.
+- `public/js/script.js`: Experience-link scrolling, animated Experience story
+  disclosures, and email copying with success/failure feedback and a clipboard fallback.
 - `tests/copy-email.test.cjs`: Node.js built-in tests that execute `public/js/script.js`
   in a VM with a mocked DOM to verify email-copy behavior.
+- `tests/experience-toggle.test.cjs`: VM tests for the Experience story controls,
+  including expansion, collapse, reduced motion, and rapid clicks.
 - `.github/workflows/deploy.yml`: Tests and uploads website files to the droplet
   on pushes to `main`. Mirrors `public/`, deleting obsolete remote files.
 - `docs/deployment.md`: Droplet prerequisites and GitHub Actions configuration.
 - `design/adaptive-mocks/`: Four retained mobile and tablet PNG design references.
   See `design/README.md` for their scope and which hero reference takes precedence.
+- `design/experience-redesign/`: Desktop, tablet, and mobile Experience references.
 - `public/assets/videos/`: Hero portrait animation.
 - `public/assets/images/`: Portrait poster, browser icon, and social preview image.
 - `public/assets/documents/`: Linked CV.
@@ -34,8 +37,8 @@ Run commands from the project root. No dependency installation is required.
 # Serve the site locally if Python 3 is available.
 python3 -m http.server 8000 --bind 127.0.0.1 --directory public
 
-# Run the existing tests with a Node.js version supporting node:test.
-node --test tests/copy-email.test.cjs
+# Run the tests with a Node.js version supporting node:test.
+node --test tests/*.test.cjs
 
 # Check browser JavaScript syntax.
 node --check public/js/script.js
@@ -70,12 +73,11 @@ access. There is no configured lint or build command.
 
 ## Responsive layout and behavior
 
-CSS switches layouts at 1099px, 640px, and 375px. JavaScript switches the timeline
-at widths below 1100px and at 640px or less. Keep these thresholds consistent.
-The timeline uses absolutely positioned cards and SVG connectors whose geometry
-is calculated from card heights. Review both CSS and `layoutTimeline` when
-changing card dimensions, spacing, or the number of jobs. Preserve resize
-handling through `requestAnimationFrame` and `ResizeObserver`.
+CSS switches layouts at 1099px, 640px, and 375px. The Experience timeline uses
+normal-flow cards and decorative CSS connectors, so expanded stories move later
+cards without calculated positions. Keep the contract role marked as concurrent.
+Story buttons toggle `aria-expanded`, animate the story height, and honor reduced
+motion. Keep full story text in the markup and use CSS clipping for previews.
 
 Email copying first tries `navigator.clipboard.writeText`, then falls back to a
 temporary textarea and `document.execCommand('copy')`. Keep confirmed-success
@@ -91,5 +93,6 @@ focus restoration, and the single label-reset timer intact.
 - In the browser, check timeline alignment, card overlap, horizontal overflow,
   hero media, section navigation, CV/contact links, and keyboard interaction as
   relevant to the change.
-- The Node tests cover clipboard logic, not real-browser layout or clipboard
-  permissions. Report which checks ran and any checks that could not be run.
+- The Node tests cover clipboard and Experience toggle logic, not real-browser
+  layout or clipboard permissions. Report which checks ran and any checks that
+  could not be run.
