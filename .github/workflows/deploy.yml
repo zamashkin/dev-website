@@ -25,14 +25,29 @@ jobs:
 
       - name: Validate JavaScript
         run: |
+          node --check public/js/posthog.js
           node --check public/js/script.js
           node --test tests/*.test.cjs
 
       - name: Prepare website files
+        env:
+          POSTHOG_KEY: ${{ secrets.POSTHOG_KEY }}
+          POSTHOG_HOST: ${{ secrets.POSTHOG_HOST }}
         run: |
           test -s public/index.html
+          for name in POSTHOG_KEY POSTHOG_HOST; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing required GitHub Actions secret: $name"
+              exit 1
+            fi
+          done
           mkdir -p "$RUNNER_TEMP/website"
           rsync -rt --exclude='.DS_Store' public/ "$RUNNER_TEMP/website/"
+          node <<'NODE'
+          const fs = require('node:fs');
+          const config = `window.POSTHOG_KEY = ${JSON.stringify(process.env.POSTHOG_KEY)};\nwindow.POSTHOG_HOST = ${JSON.stringify(process.env.POSTHOG_HOST)};\n`;
+          fs.writeFileSync(`${process.env.RUNNER_TEMP}/website/js/posthog-config.js`, config);
+          NODE
 
       - name: Upload to droplet
         env:

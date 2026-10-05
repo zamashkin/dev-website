@@ -26,6 +26,28 @@ if (heroVideo) {
   heroVideo.addEventListener('error', () => heroVideo.classList.remove('is-ready'));
 }
 
+const capturePortfolioEvent = (event, properties) => {
+  window.posthog?.capture?.(event, properties);
+};
+
+const logPortfolioActivity = (level, message, attributes) => {
+  window.posthog?.captureLog?.({ level, body: message, attributes });
+};
+
+const cvButton = document.querySelector('.hero-button.is-primary');
+cvButton?.addEventListener('click', () => {
+  capturePortfolioEvent('cv_opened', { source: 'hero' });
+});
+
+document.querySelectorAll('.contact-card a').forEach((link) => {
+  link.addEventListener('click', () => {
+    const contactChannel = link.classList.contains('email-main')
+      ? 'email'
+      : link.querySelector('span')?.textContent?.trim().toLowerCase();
+    capturePortfolioEvent('contact_link_opened', { contact_channel: contactChannel });
+  });
+});
+
 const experienceTeaser = document.querySelector('.section-teaser[href="#experience"]');
 experienceTeaser?.addEventListener('click', (event) => {
   const experienceHeading = document.querySelector('#experience .section-heading');
@@ -51,6 +73,11 @@ document.querySelectorAll?.('[data-story-toggle]').forEach((button) => {
     story.classList.toggle('is-expanded', !wasExpanded);
     button.setAttribute('aria-expanded', String(!wasExpanded));
     button.textContent = wasExpanded ? 'Read more' : 'Show less';
+    if (!wasExpanded) {
+      const attributes = { experience_id: story.id };
+      capturePortfolioEvent('experience_story_expanded', attributes);
+      logPortfolioActivity('info', 'portfolio experience story expanded', attributes);
+    }
     if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) {
       story.style.height = '';
       return;
@@ -108,9 +135,13 @@ copyButton?.addEventListener('click', async () => {
 
   try {
     await copyText(copyButton.dataset.email);
+    capturePortfolioEvent('email_copied');
+    logPortfolioActivity('info', 'portfolio contact email copied', { copy_method: 'clipboard' });
     copyButton.classList.add('is-copied');
     copyButton.innerHTML = '<span aria-hidden="true">✓</span> Copied';
   } catch {
+    capturePortfolioEvent('email_copy_failed');
+    logPortfolioActivity('warn', 'portfolio contact email copy failed', { copy_method: 'clipboard' });
     copyButton.textContent = 'Copy failed — retry';
   } finally {
     copyButton.disabled = false;

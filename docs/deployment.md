@@ -42,6 +42,8 @@ these **repository secrets**:
 | `DEPLOY_PATH` | Absolute directory served by the web server, for example `/var/www/dev-website`. No spaces. |
 | `DEPLOY_SSH_KEY` | Entire private key from `~/.ssh/dev-website-deploy`, including BEGIN/END lines. |
 | `DEPLOY_KNOWN_HOSTS` | Verified SSH host-key entry for the droplet, as described below. |
+| `POSTHOG_KEY` | Public PostHog project token injected into the deployed browser config. |
+| `POSTHOG_HOST` | PostHog ingestion host injected into the deployed browser config. |
 
 Keep the private key out of the repository and chat. Its public counterpart
 belongs in the droplet's `authorized_keys`, not GitHub's repository Deploy keys.
@@ -65,8 +67,9 @@ known-hosts entry. The droplet firewall must permit the runner's SSH connection.
 
 ## Files uploaded
 
-All files and subdirectories inside `public/` are copied automatically. The
-current structure includes:
+All files and subdirectories inside `public/` are copied automatically. During
+this step, the workflow generates `js/posthog-config.js` from the configured
+PostHog secrets in the temporary upload directory. The current structure includes:
 
 - `index.html`
 - `css/` and `js/`
