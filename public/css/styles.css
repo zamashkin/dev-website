@@ -69,7 +69,7 @@ h1 { margin:0; font:clamp(64px,6vw,104px)/.95 Impact,"Arial Narrow",sans-serif; 
 .experience-card-contract { --preview-height:190px; }
 .experience-toggle { display:none; align-items:center; gap:12px; min-height:38px; margin:12px 0 14px; padding:5px 13px; color:var(--ink); cursor:pointer; border:1px solid var(--cyan); border-radius:5px; background:transparent; font:13px var(--mono); }
 .experience-card.is-interactive .experience-toggle { display:inline-flex; }
-.experience-toggle::after { content:"⌄"; color:var(--cyan); font-size:18px; line-height:1; transition:transform .25s ease; }
+.experience-toggle::after { content:""; flex-shrink:0; width:9px; height:6px; background:var(--cyan); clip-path:polygon(0 0,50% 65%,100% 0,100% 35%,50% 100%,0 35%); transition:transform .25s ease; }
 .experience-toggle[aria-expanded="true"]::after { transform:rotate(180deg); }
 .experience-toggle:hover { background:#1de4ec12; }
 .experience-toggle:focus-visible { outline:2px solid var(--cyan); outline-offset:3px; }
