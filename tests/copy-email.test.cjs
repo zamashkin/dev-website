@@ -28,6 +28,7 @@ function setup({ writeText, fallback = () => true } = {}) {
     navigator: writeText ? { clipboard: { writeText } } : {},
     document: {
       querySelector: (selector) => selector === '.copy-email' ? button : null,
+      querySelectorAll: () => [],
       activeElement: { focus() { focused = true; } },
       createElement: () => field,
       body: { append() {} },
