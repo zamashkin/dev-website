@@ -13,10 +13,16 @@ experience, not this project's dependencies.
 - `public/index.html`: Page content, metadata, analytics, and the Home, Experience,
   Stack, and Contacts sections. Loads the stylesheet and browser script directly.
 - `public/css/styles.css`: Theme variables, layouts, animations, and responsive overrides.
+- `public/js/i18n.js`: English/Russian switching. English text stays in the markup
+  (`data-i18n`, `data-i18n-label`, `data-i18n-content`, `data-i18n-href`); the Russian dictionary and
+  script-set strings live here. Picks a saved choice, then the browser's preferred
+  languages (uk, be and kk map to Russian), then English. Loaded in `<head>` so a non-English page is hidden (`html.i18n-pending`) until
+  an inline call after `</main>` translates it; `script.js` reads strings via `window.siteI18n`.
 - `public/js/script.js`: Experience-link scrolling, animated Experience story
   disclosures, and email copying with success/failure feedback and a clipboard fallback.
 - `tests/copy-email.test.cjs`: Node.js built-in tests that execute `public/js/script.js`
   in a VM with a mocked DOM to verify email-copy behavior.
+- `tests/i18n.test.cjs`: VM tests for language detection, switching, and storage fallback.
 - `tests/experience-toggle.test.cjs`: VM tests for the Experience story controls,
   including expansion, collapse, reduced motion, and rapid clicks.
 - `.github/workflows/deploy.yml`: Tests and uploads website files to the droplet
@@ -27,7 +33,7 @@ experience, not this project's dependencies.
 - `design/experience-redesign/`: Desktop, tablet, and mobile Experience references.
 - `public/assets/videos/`: Hero portrait animation.
 - `public/assets/images/`: Portrait poster, browser icon, and social preview image.
-- `public/assets/documents/`: Linked CV.
+- `public/assets/documents/`: Linked English and Russian CVs.
 
 ## Local development
 
@@ -47,7 +53,8 @@ node --check public/js/script.js
 Open `public/index.html` directly for a quick preview, or use
 `http://127.0.0.1:8000` with the optional server. Tabler icon fonts are loaded
 from jsDelivr, and Google Analytics is loaded externally; these require network
-access. There is no configured lint or build command.
+access. The hero buttons use inline Tabler SVGs instead of the font so their
+icons do not pop in after the page appears. There is no configured lint or build command.
 
 ## Editing conventions
 
@@ -62,6 +69,8 @@ access. There is no configured lint or build command.
 - Reuse the theme variables in `:root` and the existing dark terminal-inspired
   visual language, monospace text, cyan accents, and git-style timeline.
 - Keep section IDs, links, and JavaScript selectors aligned with the markup.
+- When changing visible text or accessible labels, update the matching Russian
+  entry in `public/js/i18n.js`, and tag new translatable text with `data-i18n` keys.
 - Preserve semantic links and buttons, accessible labels, decorative icon
   attributes, clipboard status announcements, and existing reduced-motion styles.
 - Preserve portrait playback attributes and the poster fallback when editing

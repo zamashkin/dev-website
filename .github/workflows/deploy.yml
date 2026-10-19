@@ -25,6 +25,7 @@ jobs:
 
       - name: Validate JavaScript
         run: |
+          node --check public/js/i18n.js
           node --check public/js/posthog.js
           node --check public/js/script.js
           node --test tests/*.test.cjs

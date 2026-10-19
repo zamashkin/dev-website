@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Senior Frontend Developer, 7+ years of experience" />
+    <meta name="description" content="Senior Frontend Developer, 7+ years of experience" data-i18n-content="meta.description" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Aleksandr Zamashkin" />
     <meta property="og:description" content="Senior Frontend Developer, 7+ years of experience" />
@@ -12,9 +12,10 @@
     <meta property="og:image:height" content="640" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:alt" content="ASCII portrait of Aleksandr Zamashkin" />
-    <title>Aleksandr Zamashkin</title>
+    <title data-i18n="meta.title">Aleksandr Zamashkin</title>
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/i18n.js?v=5"></script>
     <noscript><style>.hero-video-frame,.hero-poster { opacity:1; }</style></noscript>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.46.0/dist/tabler-icons.min.css" />
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TJ9ZBV14FH"></script>
@@ -29,56 +30,60 @@
   <body>
     <main>
       <section class="section hero" id="home">
+        <div class="language-switch" role="group" aria-label="Language" data-i18n-label="language.group" hidden>
+          <button type="button" data-language="en" lang="en" aria-label="English" aria-pressed="true">EN</button>
+          <button type="button" data-language="ru" lang="ru" aria-label="Русский" aria-pressed="false">RU</button>
+        </div>
         <div class="hero-intro">
           <div class="hero-copy">
             <p class="eyebrow">$ whoami</p>
-            <h1>ALEKSANDR <br/>ZAMASHKIN</h1>
-            <p class="role">SENIOR FRONTEND ENGINEER</p>
-            <p class="availability"><span class="online-indicator" role="img" aria-label="Available"></span>OPEN TO NEW OPPORTUNITIES</p>
-            <p class="pitch">
+            <h1 data-i18n="hero.name">ALEKSANDR <br/>ZAMASHKIN</h1>
+            <p class="role" data-i18n="hero.role">SENIOR FRONTEND ENGINEER</p>
+            <p class="availability"><span class="online-indicator" role="img" aria-label="Available" data-i18n-label="hero.availableLabel"></span><span data-i18n="hero.availability">OPEN TO NEW OPPORTUNITIES</span></p>
+            <p class="pitch" data-i18n="hero.pitch">
               Frontend Engineer with 7+ years of experience building web products across their full lifecycle. Worked on early-stage products,
 helping validate hypotheses and turn initial concepts into working solutions, as well as on large-scale, business-critical systems with
-complex architectures and business logic. 
+complex architectures and business logic.
             </p>
           </div>
           <div class="hero-video-frame">
             <img class="hero-poster" src="assets/images/my-face-poster-optimized.webp" alt="" aria-hidden="true" />
-            <video class="hero-video" poster="assets/images/my-face-poster-optimized.webp" autoplay muted loop playsinline aria-label="ASCII portrait animation">
+            <video class="hero-video" poster="assets/images/my-face-poster-optimized.webp" autoplay muted loop playsinline aria-label="ASCII portrait animation" data-i18n-label="hero.videoLabel">
               <source src="assets/videos/my-face-ascii-optimized.webm" type="video/webm" />
             </video>
           </div>
         </div>
-        <div class="hero-actions" aria-label="Primary actions">
-          <a class="hero-button is-primary" href="assets/documents/Aleksandr_Zamashkin_Frontend.pdf" target="_blank" rel="noopener noreferrer"><i class="ti ti-file-text" aria-hidden="true"></i>Look at CV</a>
-          <a class="hero-button" href="#contacts"><i class="ti ti-message-circle" aria-hidden="true"></i>Contacts</a>
+        <div class="hero-actions" aria-label="Primary actions" data-i18n-label="hero.actionsLabel">
+          <a class="hero-button is-primary" href="assets/documents/Aleksandr_Zamashkin_Frontend.pdf" data-i18n-href="hero.cvHref" target="_blank" rel="noopener noreferrer"><svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 3v4a1 1 0 0 0 1 1h4" /><path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /><path d="M9 9l1 0" /><path d="M9 13l6 0" /><path d="M9 17l6 0" /></svg><span data-i18n="hero.cv">Look at CV</span></a>
+          <a class="hero-button" href="#contacts"><svg class="hero-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 20l1.3 -3.9c-2.324 -3.437 -1.426 -7.872 2.1 -10.374c3.526 -2.501 8.59 -2.296 11.845 .48c3.255 2.777 3.695 7.266 1.029 10.501c-2.666 3.235 -7.615 4.215 -11.574 2.293l-4.7 1" /></svg><span data-i18n="hero.contacts">Contacts</span></a>
         </div>
 
         <a class="section-teaser" href="#experience">
-          <span>Experience</span>
+          <span data-i18n="experience.title">Experience</span>
           <span aria-hidden="true">↓</span>
         </a>
       </section>
 
       <section class="section experience-section" id="experience">
-        <header class="section-heading"><h2>Experience</h2></header>
-        <p class="experience-intro">A career shaped by quality, product thinking and growing technical ownership.</p>
-        <p class="experience-path">Quality <span aria-hidden="true">→</span> Product thinking <span aria-hidden="true">→</span> Technical ownership <span aria-hidden="true">→</span> Startup decisions</p>
-        <div class="experience-timeline" aria-label="Work experience timeline">
+        <header class="section-heading"><h2 data-i18n="experience.title">Experience</h2></header>
+        <p class="experience-intro" data-i18n="experience.intro">A career shaped by quality, product thinking and growing technical ownership.</p>
+        <p class="experience-path" data-i18n="experience.path">Quality <span aria-hidden="true">→</span> Product thinking <span aria-hidden="true">→</span> Technical ownership <span aria-hidden="true">→</span> Startup decisions</p>
+        <div class="experience-timeline" aria-label="Work experience timeline" data-i18n-label="experience.timelineLabel">
           <article class="experience-card experience-card-early experience-card-aventica">
             <span class="experience-rail" aria-hidden="true"></span>
             <div class="experience-card-content">
               <div class="experience-card-main">
-                <p class="experience-chapter">01 / QUALITY FOUNDATIONS</p>
+                <p class="experience-chapter" data-i18n="aventica.chapter">01 / QUALITY FOUNDATIONS</p>
                 <h3>Aventica</h3>
-                <p class="experience-meta">QA Engineer <span aria-hidden="true">|</span> 2018–2019</p>
-                <div class="experience-story" id="story-aventica">
+                <p class="experience-meta" data-i18n="aventica.meta">QA Engineer <span aria-hidden="true">|</span> 2018–2019</p>
+                <div class="experience-story" id="story-aventica" data-i18n="aventica.story">
                   <p>I started my career in QA with a foundation in HTML and CSS. After learning Python, I began using it to automate tests, building practical programming experience alongside my testing work and eventually automating 89% of test cases.</p>
                   <p>I was particularly interested in interfaces and user experience, so when an opportunity to move into frontend development came up, I took it.</p>
                 </div>
                 <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-aventica" aria-expanded="false">Read more</button>
                 <p class="experience-tech">Python <span aria-hidden="true">·</span> Selenium</p>
               </div>
-              <div class="experience-outcome"><strong>89%</strong><span>of test cases automated</span></div>
+              <div class="experience-outcome"><strong>89%</strong><span data-i18n="aventica.outcome">of test cases automated</span></div>
             </div>
           </article>
 
@@ -86,27 +91,27 @@ complex architectures and business logic.
             <span class="experience-rail" aria-hidden="true"></span>
             <div class="experience-card-content">
               <div class="experience-card-main">
-                <p class="experience-chapter">02 / UNDERSTANDING BUSINESS NEEDS</p>
+                <p class="experience-chapter" data-i18n="mel.chapter">02 / UNDERSTANDING BUSINESS NEEDS</p>
                 <h3>Mel.fm</h3>
-                <p class="experience-meta">Frontend Developer <span aria-hidden="true">|</span> 2019–2020</p>
-                <div class="experience-story" id="story-mel">
+                <p class="experience-meta" data-i18n="mel.meta">Frontend Developer <span aria-hidden="true">|</span> 2019–2020</p>
+                <div class="experience-story" id="story-mel" data-i18n="mel.story">
                   <p>At Mel.fm, I built reader-facing experiences and tools for the editorial team. Working with editors and marketing taught me to understand the goals behind their requests and connect frontend work with business needs.</p>
                   <p>Alongside that, I gained experience improving a product used by millions of readers. I helped modernize the frontend through the transition from legacy Closure code toward React and implemented AMP pages that reduced mobile load time by 47%.</p>
                 </div>
                 <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-mel" aria-expanded="false">Read more</button>
                 <p class="experience-tech">React <span aria-hidden="true">·</span> GraphQL</p>
               </div>
-              <div class="experience-outcome"><strong>47%</strong><span>reduction in mobile load time</span></div>
+              <div class="experience-outcome"><strong>47%</strong><span data-i18n="mel.outcome">reduction in mobile load time</span></div>
             </div>
           </article>
 
           <div class="experience-pair">
             <article class="experience-card experience-card-raiffeisen">
               <span class="experience-rail" aria-hidden="true"></span>
-              <p class="experience-chapter">03 / GROWING INTO OWNERSHIP</p>
-              <h3>Raiffeisen Bank Russia</h3>
-              <p class="experience-meta">Frontend Engineer <span aria-hidden="true">|</span> 2021–2026</p>
-              <div class="experience-story" id="story-raiffeisen">
+              <p class="experience-chapter" data-i18n="raiffeisen.chapter">03 / GROWING INTO OWNERSHIP</p>
+              <h3 data-i18n="raiffeisen.company">Raiffeisen Bank Russia</h3>
+              <p class="experience-meta" data-i18n="raiffeisen.meta">Frontend Engineer <span aria-hidden="true">|</span> 2021–2026</p>
+              <div class="experience-story" id="story-raiffeisen" data-i18n="raiffeisen.story">
                 <p>I joined an established tax-payment product for small and medium businesses, initially implementing analyst-defined tasks and learning to work within a Scrum team. As our team’s scope expanded to four products, I helped build three new services from scratch: employee payments, automatic tax savings, and a tax account for tracking tax deductions in a dedicated government system.</p>
                 <p>I handled frontend development largely independently for three products and collaborated on the fourth. Over time, I took ownership of features, contributed heavily to planning, and became someone teammates turned to for product context. I regularly reviewed code and worked through technical questions with colleagues, sharing knowledge and seeking advice.</p>
                 <p>My responsibilities also grew to include architectural decisions and long-term maintainability. I advocated for independent microfrontend modules so products could be released separately and their codebases kept manageable, while sharing a common technology stack and the bank’s design system. As part of the bank’s broader architectural transition, I migrated an application out of the legacy monorepository, reducing build time by 67% and eliminating cross-team release approvals.</p>
@@ -115,32 +120,32 @@ complex architectures and business logic.
               <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-raiffeisen" aria-expanded="false">Read more</button>
               <p class="experience-tech">React <span aria-hidden="true">·</span> TypeScript <span aria-hidden="true">·</span> Webpack <span aria-hidden="true">·</span> Cypress</p>
               <div class="experience-outcomes">
-                <div class="experience-outcome"><strong>20,000+</strong><span>users of the signing integration</span></div>
-                <div class="experience-outcome"><strong>67%</strong><span>reduction in build time</span></div>
+                <div class="experience-outcome"><strong data-i18n="raiffeisen.usersValue">20,000+</strong><span data-i18n="raiffeisen.usersOutcome">users of the signing integration</span></div>
+                <div class="experience-outcome"><strong>67%</strong><span data-i18n="raiffeisen.buildOutcome">reduction in build time</span></div>
               </div>
             </article>
 
             <article class="experience-card experience-card-contract">
-              <p class="experience-chapter">04 / STARTUP DECISIONS</p>
+              <p class="experience-chapter" data-i18n="intrepid.chapter">04 / STARTUP DECISIONS</p>
               <h3>Intrepid Fox</h3>
-              <p class="experience-meta">Frontend Engineer <span aria-hidden="true">|</span> 2024–2025</p>
-              <p class="experience-contract-meta"><span>Part-time contract</span> Alongside Raiffeisen</p>
-              <div class="experience-story" id="story-intrepid">
+              <p class="experience-meta" data-i18n="intrepid.meta">Frontend Engineer <span aria-hidden="true">|</span> 2024–2025</p>
+              <p class="experience-contract-meta" data-i18n="intrepid.contract"><span>Part-time contract</span> Alongside Raiffeisen</p>
+              <div class="experience-story" id="story-intrepid" data-i18n="intrepid.story">
                 <p>Alongside my banking work, I joined an early-stage AI product using Vue and Nuxt. The startup environment gave me greater involvement in technology choices, weighing immediate delivery needs against future development.</p>
                 <p>I contributed to a KYB onboarding redesign that helped completion rise from 13% to 26%. I also co-developed an interactive reporting interface for exploring complex dependency graphs, helping evaluate visualization libraries against a demanding design, potentially large graphs, Vue compatibility, and active maintenance.</p>
                 <p>This experience broadened my technical range and gave me more practice choosing tools around the needs of a developing product.</p>
               </div>
               <button class="experience-toggle" type="button" data-story-toggle aria-controls="story-intrepid" aria-expanded="false">Read more</button>
               <p class="experience-tech">Vue <span aria-hidden="true">·</span> Nuxt</p>
-              <div class="experience-outcome"><strong>13% <span aria-hidden="true">→</span> 26%</strong><span>KYB onboarding completion</span></div>
+              <div class="experience-outcome"><strong>13% <span aria-hidden="true">→</span> 26%</strong><span data-i18n="intrepid.outcome">KYB onboarding completion</span></div>
             </article>
           </div>
         </div>
       </section>
 
       <section class="section stack-section" id="stack">
-        <header class="section-heading"><h2>Stack</h2></header>
-        <div class="terminal-window" aria-label="Technology stack">
+        <header class="section-heading"><h2 data-i18n="stack.title">Stack</h2></header>
+        <div class="terminal-window" aria-label="Technology stack" data-i18n-label="stack.label">
           <div class="window-bar" aria-hidden="true"><i></i><i></i><i></i></div>
           <p class="command"><span>$</span> stack --inspect --only-with-production-experience</p>
           <div class="stack-groups">
@@ -166,37 +171,38 @@ complex architectures and business logic.
       </section>
 
       <section class="section contacts-section" id="contacts">
-        <header class="section-heading"><h2>Contacts</h2></header>
+        <header class="section-heading"><h2 data-i18n="contacts.title">Contacts</h2></header>
         <div class="contacts-grid">
-          <a class="contact-card" href="https://www.linkedin.com/in/zamashkin/" target="_blank" rel="noopener noreferrer" aria-label="Open Aleksandr's LinkedIn profile (opens in a new tab)">
+          <a class="contact-card" href="https://www.linkedin.com/in/zamashkin/" target="_blank" rel="noopener noreferrer" aria-label="Open Aleksandr's LinkedIn profile (opens in a new tab)" data-i18n-label="contacts.linkedinLabel">
             <i class="external ti ti-arrow-up-right" aria-hidden="true"></i>
             <i class="contact-icon ti ti-brand-linkedin" aria-hidden="true"></i>
             <span>LinkedIn</span>
           </a>
-          <a class="contact-card" href="https://t.me/zamashkinn" target="_blank" rel="noopener noreferrer" aria-label="Contact Aleksandr on Telegram (opens in a new tab)">
+          <a class="contact-card" href="https://t.me/zamashkinn" target="_blank" rel="noopener noreferrer" aria-label="Contact Aleksandr on Telegram (opens in a new tab)" data-i18n-label="contacts.telegramLabel">
             <i class="external ti ti-arrow-up-right" aria-hidden="true"></i>
             <i class="contact-icon ti ti-brand-telegram" aria-hidden="true"></i>
             <span>Telegram</span>
           </a>
-          <a class="contact-card" href="https://wa.link/0wta5y" target="_blank" rel="noopener noreferrer" aria-label="Contact Aleksandr on WhatsApp (opens in a new tab)">
+          <a class="contact-card" href="https://wa.link/0wta5y" target="_blank" rel="noopener noreferrer" aria-label="Contact Aleksandr on WhatsApp (opens in a new tab)" data-i18n-label="contacts.whatsappLabel">
             <i class="external ti ti-arrow-up-right" aria-hidden="true"></i>
             <i class="contact-icon ti ti-brand-whatsapp" aria-hidden="true"></i>
             <span>WhatsApp</span>
           </a>
-          <a class="contact-card" href="https://github.com/zamashkin" target="_blank" rel="noopener noreferrer" aria-label="Open Aleksandr's GitHub profile (opens in a new tab)">
+          <a class="contact-card" href="https://github.com/zamashkin" target="_blank" rel="noopener noreferrer" aria-label="Open Aleksandr's GitHub profile (opens in a new tab)" data-i18n-label="contacts.githubLabel">
             <i class="external ti ti-arrow-up-right" aria-hidden="true"></i>
             <i class="contact-icon ti ti-brand-github" aria-hidden="true"></i>
             <span>GitHub</span>
           </a>
           <div class="contact-card email-card">
-            <a class="email-main" href="mailto:aleksandr@zamashkin.dev" aria-label="Send mail link"><i class="external ti ti-arrow-up-right" aria-hidden="true"></i><i class="contact-icon ti ti-mail" aria-hidden="true"></i><span>Email</span></a>
-            <button class="copy-email" type="button" data-email="aleksandr@zamashkin.dev" aria-live="polite"><span aria-hidden="true">▣</span> Copy email</button>
+            <a class="email-main" href="mailto:aleksandr@zamashkin.dev" aria-label="Send mail link" data-i18n-label="contacts.emailLabel"><i class="external ti ti-arrow-up-right" aria-hidden="true"></i><i class="contact-icon ti ti-mail" aria-hidden="true"></i><span data-i18n="contacts.email">Email</span></a>
+            <button class="copy-email" type="button" data-email="aleksandr@zamashkin.dev" aria-live="polite" data-i18n="contacts.copyEmail"><span aria-hidden="true">▣</span> Copy email</button>
           </div>
         </div>
       </section>
     </main>
+    <script>window.siteI18n?.translatePage();</script>
     <script src="js/posthog-config.js"></script>
     <script src="js/posthog.js"></script>
-    <script src="js/script.js?v=5"></script>
+    <script src="js/script.js?v=7"></script>
   </body>
 </html>
