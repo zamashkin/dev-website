@@ -32,10 +32,21 @@ Then open [localhost:8000](http://127.0.0.1:8000).
 
 ## Tests
 
-With Node.js installed:
+With Node.js 18 or newer:
 
 ```sh
-node --test tests/copy-email.test.cjs
+node --test tests/*.test.cjs
+```
+
+The tests run the browser scripts against a mocked DOM. They cover email
+copying, the Experience story toggles, and language detection and switching,
+but not real-browser layout. GitHub Actions runs them before each deploy, along
+with a syntax check of each script:
+
+```sh
+node --check public/js/i18n.js
+node --check public/js/posthog.js
+node --check public/js/script.js
 ```
 
 ## Deployment
